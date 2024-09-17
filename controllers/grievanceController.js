@@ -54,6 +54,55 @@ const getAllGrievances = async (req, res) => {
   }    
 };
 
+// update
+const updateGrievanceStatus = async (req, res) => {
+  const { pid } = req.params; // Get grievance ID from params
+  const { status } = req.body; // Get the new status from the request body
+
+  try {
+    // Find the grievance by ID and update the status
+    const updatedGrievance = await completes.findByIdAndUpdate(
+      pid, 
+      { status }, 
+      { new: true } // Return the updated grievance
+    );
+
+    if (!updatedGrievance) {
+      return res.status(404).json({ message: 'Grievance not found' });
+    }
+
+    // Respond with the updated grievance
+    res.status(200).json({ message: 'Grievance status updated successfully', grievance: updatedGrievance });
+  } catch (error) {
+    console.error('Error updating grievance status: ', error);
+    res.status(500).json({ message: 'Error updating grievance status', error });
+  }
+};
+
+// overview
+
+const getGrievancesOverview = async (req, res) => {
+  try {
+    // Fetch all grievances from the database
+    const grievances = await completes.find(); // You can add filters or pagination if needed
+
+    // Respond with the list of grievances
+    res.status(200).json({
+      message: 'Grievances fetched successfully',
+      grievances: grievances
+    });
+  } catch (error) {
+    console.error('Error fetching grievances: ', error);
+    res.status(500).json({
+      message: 'Error fetching grievances',
+      error: error.message // Send only the error message for clarity
+    });
+  }
+};
+
+
+
+
 const deleteGrievance = async (req, res) => {
 
   const {pid} = req.params
@@ -65,6 +114,6 @@ const deleteGrievance = async (req, res) => {
   }
 
 };
-export {createGrievance,getAllGrievances,deleteGrievance}  
+export {createGrievance,getAllGrievances,deleteGrievance,updateGrievanceStatus,getGrievancesOverview}  
 
 

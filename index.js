@@ -9,12 +9,12 @@ import Crouter from "./Routes/grievanceRoutes.js";
 
 // app config
 const app = express()
-const port = 4000
+const port = 4001 
 
 app.use(express.json())
 app.use(cors())
 
-  
+   
 // db connection
 connectDB();
 
@@ -35,8 +35,8 @@ app.use('/grievances',Crouter)
 //     }
 //   });
 
-
-
+ 
+  
  
 app.get("/",(req,res)=>{
     res.send("server connected") 

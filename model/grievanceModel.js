@@ -18,7 +18,12 @@ const grievanceSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,  
-  }
+  },
+  status: { 
+    type: String,
+     enum: ['pending', 'resolved'], 
+     default: 'pending'
+     }
 }); 
 
 const completes = mongoose.model('completes', grievanceSchema);

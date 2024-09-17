@@ -10,7 +10,7 @@ const adminSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
-    password:{
+    password:{ 
         type:String,
         required:true
     }
@@ -26,4 +26,4 @@ const adminSchema = new mongoose.Schema({
 })
 
 const admins= mongoose.model("admins",adminSchema)
-export default admins
+export default admins  
